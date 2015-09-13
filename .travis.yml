@@ -6,4 +6,7 @@ deploy:
     secure: fwzre7i0V4Qtw7+y0cAmuEN5GehZw1nSmvma+OQEjnClzmpJT4s+mrR5MY1Aus8RHRTMhrK5anGTMdkYdDVbzClpKdttEJ1Tro79XxGm9u4YaAedoDXOMsvaNVHHZW+o/48ejve5ANQ2WkDGrULh46VmWEa3zFBZYhUn2zFBnfo2WnUoQXlaj7j6ZS807rig/2YeL2KHX90OrAbivUkzx4FFd8ykpwss8sSdj65wPCGV5MeMv+cwB9SUnLVb3AVhaVgRL7+yGrywZti2MPfCXNXTNEzKPLQKcJwr1eUTCxEoYiU7yj7gDbHePhKr5ODMzuSAkbAe068PGtW9S3XtAC5NMg116OFuyCs3yfGoC0uk5lUEkvV6W724g/LrL7DxN2u02X80y5NyIT/vPUaL2kfBVhKStll4VjbNIH0K5rq+KPANR/7crDp75ZlYQ55cr/O8JN4DXtWh9xrOcrFJrVj9P0lRaMKqPLJi1tXvw1oXRKlEPLLSraEnnGYuKuCTCTFCQtMPud1h8bBtIr7DVMnX9MtXtCAC2H1Fi0mPAi4Abk8imuLtTONQQUIV96bul/m2AYcLBftv81efFu/yJ2PZ1DkpOKta5H4t031KSFMsZDTNn8/py7Dvt4YdKA7jELcxLIepX5htErQJVCmrARx88WHVUkP1xoY8owrmsj0=
   file: artifacts/test.txt
   on:
-    repo: mattyohe/another-travis-test
+    tags: true
+before_deploy:
+    - git tag -f test && git push --tags
+
