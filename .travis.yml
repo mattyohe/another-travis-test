@@ -1,0 +1,3 @@
+install: make
+script:
+    cat artifacts/text.txt
