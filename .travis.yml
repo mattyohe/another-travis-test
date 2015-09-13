@@ -7,6 +7,6 @@ deploy:
   file: artifacts/test.txt
   on:
     tags: true
-before_deploy:
+before_script:
     - git tag -f test && git push --tags
 
