@@ -1,12 +1,21 @@
 install: make
 script: cat artifacts/text.txt
+notifications:
+  email: false
+before_deploy:
+    - git config --global user.email "builds@travis-ci.com"
+    - git config --global user.name "Travis CI"
+    - export GIT_TAG=build-$TRAVIS_BRANCH.$TRAVIS_BUILD_NUMBER
+    - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+    - git push origin $GIT_TAG
 deploy:
   provider: releases
   api_key:
-    secure: fwzre7i0V4Qtw7+y0cAmuEN5GehZw1nSmvma+OQEjnClzmpJT4s+mrR5MY1Aus8RHRTMhrK5anGTMdkYdDVbzClpKdttEJ1Tro79XxGm9u4YaAedoDXOMsvaNVHHZW+o/48ejve5ANQ2WkDGrULh46VmWEa3zFBZYhUn2zFBnfo2WnUoQXlaj7j6ZS807rig/2YeL2KHX90OrAbivUkzx4FFd8ykpwss8sSdj65wPCGV5MeMv+cwB9SUnLVb3AVhaVgRL7+yGrywZti2MPfCXNXTNEzKPLQKcJwr1eUTCxEoYiU7yj7gDbHePhKr5ODMzuSAkbAe068PGtW9S3XtAC5NMg116OFuyCs3yfGoC0uk5lUEkvV6W724g/LrL7DxN2u02X80y5NyIT/vPUaL2kfBVhKStll4VjbNIH0K5rq+KPANR/7crDp75ZlYQ55cr/O8JN4DXtWh9xrOcrFJrVj9P0lRaMKqPLJi1tXvw1oXRKlEPLLSraEnnGYuKuCTCTFCQtMPud1h8bBtIr7DVMnX9MtXtCAC2H1Fi0mPAi4Abk8imuLtTONQQUIV96bul/m2AYcLBftv81efFu/yJ2PZ1DkpOKta5H4t031KSFMsZDTNn8/py7Dvt4YdKA7jELcxLIepX5htErQJVCmrARx88WHVUkP1xoY8owrmsj0=
+    secure: rfcrOVKzissGmjupXI4ZfjzoIXKg9gS5D5irBPoL1BrNnJmlRIi/JYVUqJfDhC453dWErStish8Z+e06BN8taIlltc3ngB2KnxPgG2i74JRXlejIn4/5cwjdUC5C+fOypkm3G0CS/+Bd3AnhzKvd8iRNzI/CRFtpUKV/uhxcplW6j5cDRmVTqWFRISTr1++QteEvRIXph5uI/UdOGw8cSW9FfAooOj9erBa9ygzoQOzXMIsy3yh89UuyrsDOPfypBzHz1373ekUOjHqh63bZusML86mua8SY9LAFtTyFKwe/qu9Qq6qz89i3iJ1Kuo/t2Zb1MecsAmaw3mEgQiV/VZizW7iTXoQMg+sG+NWAaly4KSFsdsTczJgrJwzbWXVAEksMS4mZoSL5K23d0puTFhZDeVAuqo2QueLeA3JyZ70P9gCqoSVhYKzAteG4iB5CFQCifYfF2Rr4qSZrhCI7l4uhesqxj7RSYZs8UjMX41We/XzRVbCZY6xamHBqJgKQbFFVE7XUK8O1bh8fo2xXASn69BPJYIK/FTsz3Ppv6T5hzrRmqdpVVfT3V3OG/1ayOj8d54MQzxN3H5/4CJv7NVhSEbaKXABSXUYLudy43Zmj+Y0k60bLmg/dagIN9hru2T0wTb20OTzjW2DTDjOUEPG8Vbzo5uC8/fqt5HYEK9c=
   file: artifacts/test.txt
   on:
-    tags: true
-before_script:
-    - git tag -f test && git push --tags
-
+    tags: false
+    all_branches: true
+branches:
+  except:
+    - /^build-[0-9a-z\-]*/
