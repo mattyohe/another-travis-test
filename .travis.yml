@@ -7,7 +7,7 @@ before_deploy:
     - git config --global user.name "Travis CI"
     - export GIT_TAG=build-$TRAVIS_BRANCH.$TRAVIS_BUILD_NUMBER
     - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-    - git push https://mattyohe:$GITHUBKEY@github.com/mattyohe/another-travis-test $GIT_TAG
+    - git push https://mattyohe:$pass@github.com/mattyohe/another-travis-test $GIT_TAG
 deploy:
   provider: releases
   api_key:
