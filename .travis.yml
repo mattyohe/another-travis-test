@@ -3,11 +3,13 @@ script: cat artifacts/text.txt
 notifications:
   email: false
 before_deploy:
-    - git config --global user.email "builds@travis-ci.com"
-    - git config --global user.name "Travis CI"
-    - export GIT_TAG=build-$TRAVIS_BRANCH.$TRAVIS_BUILD_NUMBER
-    - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-    - git push https://mattyohe:$pass@github.com/mattyohe/another-travis-test $GIT_TAG > /dev/null 2>&1
+- git config --global user.email "builds@travis-ci.com"
+- git config --global user.name "Travis CI"
+- export GIT_TAG=build-$TRAVIS_BRANCH.$TRAVIS_BUILD_NUMBER
+- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+- git push https://mattyohe:$pass@github.com/mattyohe/another-travis-test $GIT_TAG
+  > /dev/null 2>&1
+- echo $SOMEVAR
 deploy:
   provider: releases
   skip_cleanup: true
@@ -19,4 +21,7 @@ deploy:
     all_branches: true
 branches:
   except:
-    - /^build-[0-9a-z\-]*/
+  - "/^build-[0-9a-z\\-]*/"
+env:
+  global:
+    secure: S97wO+aUTfomoKjaGUR1TfirvW7sATZRHteaMLhNfKqOS4o6qesTRznv/lhS5vXISQwX3CSjyYt1yvPwc3nquqRWLo0YQhfBkK9CtazxgbhHMcqQjeY74A/PZo2w/kkgxmaFWERAgt8N/pxwzHb9KWblnmQDK3b0MMGy43rbXN2DZgZU3TxqEMhjMaRKXMOA1Excg0nfCAlQuZn0wu5enzG0EZs0Th5EGmzKrROu4vvv6wviOSnWdd16iNKB2aqeSBXLSnKTsdVC6OyTQ4a6jGvfqoasaX9xHiripETXEWf/Kn5s8soGTZVdYVzX2XrsS2tY5joupegFp00MVWonh25N0V6q/ShNTj3U63y1VrSKO026d80cTbm11hDkvtT8D5kgro6l7o9j5NFBRpiUait7Ptj2NJJeF/tBu57pgs/B6HZOsJJVrcRpSvYA+RvYHILfLXcT3A/sPo8MhD8Hkhe05iT98LWYCB+zyKtdNcmI5vVmsnertSLoykHMt/2r2VdbjkpvJBQqqCiBipWwHdxl7mKtEqALqi1RkDDMEdmGT5EhDNWXiiiTzYGclaTuTNaDk6WgPmVJSJ16LGFCZWe74C2neynZBf9B14fT6Jmhy04qIjtDp3C7tzNlwBy/8DsrdB8kbSSAhCtwHgw5zYU61kLFYhEaIO9DV2MCLeM=
