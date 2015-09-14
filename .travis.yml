@@ -10,6 +10,7 @@ before_deploy:
     - git push https://mattyohe:$pass@github.com/mattyohe/another-travis-test $GIT_TAG > /dev/null 2>&1
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: rfcrOVKzissGmjupXI4ZfjzoIXKg9gS5D5irBPoL1BrNnJmlRIi/JYVUqJfDhC453dWErStish8Z+e06BN8taIlltc3ngB2KnxPgG2i74JRXlejIn4/5cwjdUC5C+fOypkm3G0CS/+Bd3AnhzKvd8iRNzI/CRFtpUKV/uhxcplW6j5cDRmVTqWFRISTr1++QteEvRIXph5uI/UdOGw8cSW9FfAooOj9erBa9ygzoQOzXMIsy3yh89UuyrsDOPfypBzHz1373ekUOjHqh63bZusML86mua8SY9LAFtTyFKwe/qu9Qq6qz89i3iJ1Kuo/t2Zb1MecsAmaw3mEgQiV/VZizW7iTXoQMg+sG+NWAaly4KSFsdsTczJgrJwzbWXVAEksMS4mZoSL5K23d0puTFhZDeVAuqo2QueLeA3JyZ70P9gCqoSVhYKzAteG4iB5CFQCifYfF2Rr4qSZrhCI7l4uhesqxj7RSYZs8UjMX41We/XzRVbCZY6xamHBqJgKQbFFVE7XUK8O1bh8fo2xXASn69BPJYIK/FTsz3Ppv6T5hzrRmqdpVVfT3V3OG/1ayOj8d54MQzxN3H5/4CJv7NVhSEbaKXABSXUYLudy43Zmj+Y0k60bLmg/dagIN9hru2T0wTb20OTzjW2DTDjOUEPG8Vbzo5uC8/fqt5HYEK9c=
   file: artifacts/text.txt
